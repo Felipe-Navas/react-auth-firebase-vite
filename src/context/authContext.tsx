@@ -1,7 +1,9 @@
 import {
   createUserWithEmailAndPassword,
+  GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   User,
   UserCredential,
@@ -19,6 +21,7 @@ interface AuthContext {
   user: User | null
   logout: () => Promise<void>
   loading: boolean
+  loginWithGoogle: () => Promise<UserCredential>
 }
 
 const authContext = createContext<AuthContext | null>(null)
@@ -41,8 +44,12 @@ export const AuthProvider = ({ children }: Props) => {
 
   const logout = () => signOut(auth)
 
+  const loginWithGoogle = () => {
+    return signInWithPopup(auth, new GoogleAuthProvider())
+  }
+
   useEffect(() => {
-   const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser)
       setLoading(false)
     })
@@ -53,7 +60,9 @@ export const AuthProvider = ({ children }: Props) => {
   }, [])
 
   return (
-    <authContext.Provider value={{ signUp, login, user, logout, loading }}>
+    <authContext.Provider
+      value={{ signUp, login, user, logout, loading, loginWithGoogle }}
+    >
       {children}
     </authContext.Provider>
   )

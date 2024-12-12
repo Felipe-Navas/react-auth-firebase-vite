@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useAuth } from '../context/authContext'
 import { useNavigate } from 'react-router'
+import { Alert } from './Alert'
 
 export const Login = () => {
   const navigate = useNavigate()
@@ -10,7 +11,7 @@ export const Login = () => {
     password: '',
   })
 
-  const { login } = useAuth()
+  const { login, loginWithGoogle } = useAuth()
 
   const handleChange = ({
     target: { name, value },
@@ -32,9 +33,18 @@ export const Login = () => {
     }
   }
 
+  const handleGoogleLogin = async () => {
+    try {
+      await loginWithGoogle()
+      navigate('/')
+    } catch (error) {
+      setError((error as Error).message)
+    }
+  }
+
   return (
     <div>
-      {error && <p>{error}</p>}
+      {error && <Alert message={error} />}
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email</label>
         <input
@@ -54,6 +64,8 @@ export const Login = () => {
 
         <button>Login</button>
       </form>
+
+      <button onClick={handleGoogleLogin}>Google Login</button>
     </div>
   )
 }

@@ -1,6 +1,6 @@
-
-export const Alert = () => {
-  return (
-    <div>Alert</div>
-  )
+interface Props {
+  message: string
+}
+export const Alert = ({ message }: Props) => {
+  return <span>{message}</span>
 }
