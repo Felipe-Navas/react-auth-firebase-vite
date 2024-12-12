@@ -1,6 +1,11 @@
 
 export const Login = () => {
   return (
-    <div>Login</div>
+    <div>
+      <form>
+        <input type="email" name="" id="" />
+        <input type="password" name="" id="" />
+      </form>
+    </div>
   )
 }
