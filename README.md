@@ -1,50 +1,68 @@
-# React + TypeScript + Vite
+# React Auth Firebase Vite Ts
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A TypeScript React.js app using Firebase
 
-Currently, two official plugins are available:
+## Description
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+A React app written in TypeScript where I am using Firebase
 
-## Expanding the ESLint configuration
+## Demo
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+You can explore a live version of React Auth Firebase Vite Ts at the following URL:
 
-- Configure the top-level `parserOptions` property like this:
+https://Felipe-Navas.github.io/react-auth-firebase-vite
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Getting Started
+
+### Dependencies
+
+- `npm`
+- `node`
+
+### Installing
+
+- Clone the repository and install dependencies:
+
+```
+git clone https://github.com/Felipe-Navas/react-auth-firebase-vite.git && cd react-auth-firebase-vite && npm install
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### Executing program
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
 ```
+npm start
+```
+
+Preview of the login screen:
+
+<img width="350" src="assets/login.png" alt="Preview of the login screen" />
+
+Preview of the register screen:
+
+<img width="350" src="assets/register.png" alt="Preview of the register screen" />
+
+Preview of the home screen:
+
+<img width="350" src="assets/home.png" alt="Preview of the home screen" />
+
+### Running tests
+
+```
+npm test
+```
+
+## Authors
+
+- [Felipe Navas](https://www.linkedin.com/in/felipenavaslederhos) - [Email](mailto:felipenavas.itec@gmail.com?subject=[GitHub]%react-auth-firebase-vite)
+
+## Contributing
+
+1. Fork it (<https://github.com/Felipe-Navas/react-auth-firebase-vite/fork>)
+2. Create your feature branch (`git checkout -b feature/fooBar`)
+3. Commit your changes (`git commit -am 'Add some fooBar'`)
+4. Push to the branch (`git push origin feature/fooBar`)
+5. Create a new Pull Request
+
+## License
+
+This project is licensed under the [MIT License] - see the LICENSE file for details
