@@ -11,7 +11,7 @@ export const Login = () => {
     password: '',
   })
 
-  const { login, loginWithGoogle } = useAuth()
+  const { login, loginWithGoogle, resetPassword } = useAuth()
 
   const handleChange = ({
     target: { name, value },
@@ -37,6 +37,17 @@ export const Login = () => {
     try {
       await loginWithGoogle()
       navigate('/')
+    } catch (error) {
+      setError((error as Error).message)
+    }
+  }
+
+  const handleResetPassword = async () => {
+    if (!user.email) setError('Please enter your email')
+
+    try {
+      await resetPassword(user.email)
+      setError('We have sent you an email with instructions on how to reset your password')
     } catch (error) {
       setError((error as Error).message)
     }
@@ -84,17 +95,34 @@ export const Login = () => {
           />
         </div>
 
-        <button className='bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'>
-          Login
-        </button>
+        <div className="flex items-center justify-between mt-6">
+          <button className="bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            Login
+          </button>
+
+          <a
+            href="#"
+            className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+            onClick={handleResetPassword}
+          >
+            Forgot your password?
+          </a>
+        </div>
       </form>
 
-      <p className='my-4 text-sm flex justify-between px-3'>Don't have an account? <Link to="/register" className='text-blue-500 hover:underline'>Register</Link></p>
+      <p className="my-4 text-sm flex justify-between px-3">
+        Don't have an account?{' '}
+        <Link to="/register" className="text-blue-500 hover:underline">
+          Register
+        </Link>
+      </p>
 
       <button
-      className="bg-slate-50 hover:bg-slate-200 text-black shadow-md rounded border-2 border-gray-300 py-2 px-4 w-full"
-      onClick={handleGoogleLogin}>
-        Google Login</button>
+        className="bg-slate-50 hover:bg-slate-200 text-black shadow-md rounded border-2 border-gray-300 py-2 px-4 w-full"
+        onClick={handleGoogleLogin}
+      >
+        Google Login
+      </button>
     </div>
   )
 }

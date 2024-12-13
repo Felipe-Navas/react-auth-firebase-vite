@@ -2,6 +2,7 @@ import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
   onAuthStateChanged,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -22,6 +23,7 @@ interface AuthContext {
   logout: () => Promise<void>
   loading: boolean
   loginWithGoogle: () => Promise<UserCredential>
+  resetPassword: (email: string) => Promise<void>
 }
 
 const authContext = createContext<AuthContext | null>(null)
@@ -48,6 +50,8 @@ export const AuthProvider = ({ children }: Props) => {
     return signInWithPopup(auth, new GoogleAuthProvider())
   }
 
+  const resetPassword = (email: string) => sendPasswordResetEmail(auth, email)
+
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser)
@@ -61,7 +65,7 @@ export const AuthProvider = ({ children }: Props) => {
 
   return (
     <authContext.Provider
-      value={{ signUp, login, user, logout, loading, loginWithGoogle }}
+      value={{ signUp, login, user, logout, loading, loginWithGoogle, resetPassword }}
     >
       {children}
     </authContext.Provider>
